@@ -18,7 +18,7 @@ $title = [
     "trouser",
     "shorts",
     "tie",
-    "tshirt",
+    "t-shirt",
     "shoes",
     "blouse",
     "blouse",
