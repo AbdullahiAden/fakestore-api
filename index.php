@@ -127,18 +127,39 @@ $image = [
 // Steg 3 - Skapa 10 namn och spara dessa i en ny array
 $products = array();
 $length = count($products);
-for ($i = 0; $i < 20; $i++) {
-    $product = array(
-        "id" => $id[$i],
-        "title" => $title[$i],
-        "price" => $price[$i],
-        "description" => $description[$i],
-        "category" => $category[$i],
-        "image" => $image[$i],
 
-    );
-    array_push($products, $product);
+
+$show = $_GET['show'] ?? 20;
+
+if (isset($_GET['show'])) {
+
+    for ($i = 0; $i < $show; $i++) {
+        $product = array(
+            "id" => $id[$i],
+            "title" => $title[$i],
+            "price" => $price[$i],
+            "description" => $description[$i],
+            "category" => $category[$i],
+            "image" => $image[$i],
+
+        );
+        array_push($products, $product);
+    }
+} else {
+    for ($i = 0; $i < 20; $i++) {
+        $product = array(
+            "id" => $id[$i],
+            "title" => $title[$i],
+            "price" => $price[$i],
+            "description" => $description[$i],
+            "category" => $category[$i],
+            "image" => $image[$i],
+
+        );
+        array_push($products, $product);
+    }
 }
+
 
 // print_r($names); die();
 
