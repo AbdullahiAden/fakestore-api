@@ -131,9 +131,9 @@ $length = count($products);
 
 $show = $_GET['show'] ?? 20;
 
-if (isset($_GET['show'])) {
+if (!isset($_GET['show'])) {
 
-    for ($i = 0; $i < $show; $i++) {
+    for ($i = 0; $i < 20; $i++) {
         $product = array(
             "id" => $id[$i],
             "title" => $title[$i],
@@ -146,17 +146,26 @@ if (isset($_GET['show'])) {
         array_push($products, $product);
     }
 } else {
-    for ($i = 0; $i < 20; $i++) {
+    if ($show <= 0 or $show > 20) {
         $product = array(
-            "id" => $id[$i],
-            "title" => $title[$i],
-            "price" => $price[$i],
-            "description" => $description[$i],
-            "category" => $category[$i],
-            "image" => $image[$i],
+            "Show" => "Show must be between 1 and 20"
 
         );
         array_push($products, $product);
+    } else {
+        for ($i = 0; $i < $show; $i++) {
+
+            $product = array(
+                "id" => $id[$i],
+                "title" => $title[$i],
+                "price" => $price[$i],
+                "description" => $description[$i],
+                "category" => $category[$i],
+                "image" => $image[$i],
+
+            );
+            array_push($products, $product);
+        }
     }
 }
 
