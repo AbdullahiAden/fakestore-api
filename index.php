@@ -130,9 +130,9 @@ $length = count($products);
 
 
 $show = $_GET['show'] ?? 20;
+// $category = $_GET['category'];
 
-if (!isset($_GET['show'])) {
-
+if (!isset($_GET['show']) and !isset($_GET['category'])) {
     for ($i = 0; $i < 20; $i++) {
         $product = array(
             "id" => $id[$i],
@@ -145,7 +145,7 @@ if (!isset($_GET['show'])) {
         );
         array_push($products, $product);
     }
-} else {
+} elseif (isset($_GET['show'])) {
     if ($show <= 0 or $show > 20) {
         $product = array(
             "Show" => "Show must be between 1 and 20"
@@ -168,6 +168,18 @@ if (!isset($_GET['show'])) {
         }
     }
 }
+if (isset($_GET['category'])) {
+    if ($category != "men" or $category != "women" or $category != "jewelery") {
+        $product = array(
+            "Category" => "Category not found"
+
+        );
+        array_push($products, $product);
+    }
+}
+
+
+
 
 
 // print_r($names); die();
