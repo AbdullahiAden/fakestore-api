@@ -1,6 +1,6 @@
 <?php
 
-// Steg 1 - Ange lämpliga HTTP headers
+//  Ange lämpliga HTTP headers
 // Läs mer här: https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
@@ -10,7 +10,7 @@ header("Referrer-Policy: no-referrer");
 
 
 
-// Steg 2 - Skapa arrayer
+// Skapa arrayer
 $id = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 $title = [
     "bag",
@@ -20,18 +20,18 @@ $title = [
     "tie",
     "t-shirt",
     "shoes",
+    "sweater",
+    "jacket",
+    "coat",
+    "socks",
+    "tracksuit",
+    "dress",
     "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "blouse",
-    "shawl",
-    "shawl",
+    "nighty",
+    "bikini",
+    "boots",
+    "cap",
+    "polo shirt",
     "shawl"
 ];
 $price = [
@@ -58,47 +58,47 @@ $price = [
 ];
 $description = [
     "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something",
-    "something"
+    "THE ORIGINAL  black",
+    "THE ORIGINAL - clothing - b",
+    "THE ORIGINAL  bas - black",
+    "THE ORIGINAL - T-shirt  - black",
+    "THE ORIGINAL - T-shirt - bas - black",
+    "Various versions have evolved over the years,",
+    "humour and the like",
+    "opposed to using 'Content here,",
+    "readable content of a page",
+    " containing",
+    "best line ",
+    "simplicity original",
+    "Inspirerad av workwear. ",
+    "something else ",
+    "how come you wear",
+    "try these",
+    "you should",
+    "as he said nice",
+    "clothing line - b"
 ];
 $category = [
-    "men",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
-    "women",
     "women",
     "men",
     "men",
     "men",
     "men",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
+    "women",
     "men",
     "men",
+    "men",
+    "women",
 ];
 $image = [
     "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
@@ -124,70 +124,23 @@ $image = [
 ];
 
 
-// Steg 3 - Skapa 10 namn och spara dessa i en ny array
 $products = array();
-$length = count($products);
 
+for ($i = 0; $i < 20; $i++) {
+    $product = array(
+        "id" => $id[$i],
+        "title" => $title[$i],
+        "price" => $price[$i],
+        "description" => $description[$i],
+        "category" => $category[$i],
+        "image" => $image[$i],
 
-$show = $_GET['show'] ?? 20;
-// $category = $_GET['category'];
-
-if (!isset($_GET['show']) and !isset($_GET['category'])) {
-    for ($i = 0; $i < 20; $i++) {
-        $product = array(
-            "id" => $id[$i],
-            "title" => $title[$i],
-            "price" => $price[$i],
-            "description" => $description[$i],
-            "category" => $category[$i],
-            "image" => $image[$i],
-
-        );
-        array_push($products, $product);
-    }
-} elseif (isset($_GET['show'])) {
-    if ($show <= 0 or $show > 20) {
-        $product = array(
-            "Show" => "Show must be between 1 and 20"
-
-        );
-        array_push($products, $product);
-    } else {
-        for ($i = 0; $i < $show; $i++) {
-
-            $product = array(
-                "id" => $id[$i],
-                "title" => $title[$i],
-                "price" => $price[$i],
-                "description" => $description[$i],
-                "category" => $category[$i],
-                "image" => $image[$i],
-
-            );
-            array_push($products, $product);
-        }
-    }
-}
-if (isset($_GET['category'])) {
-    if ($category != "men" or $category != "women" or $category != "jewelery") {
-        $product = array(
-            "Category" => "Category not found"
-
-        );
-        array_push($products, $product);
-    }
+    );
+    array_push($products, $product);
 }
 
-
-
-
-
-// print_r($names); die();
-
-// Steg 4 – Konvertera PHP-arrayen ($names) till JSON
+// Konvertera PHP-arrayen ($names) till JSON
 $json = json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
-// json_encode — Returns the JSON representation of a value // http://php.net/manual/en/function.json-encode.php
-
-// Steg 5 – Skicka JSON till klienten
+// Skicka JSON till klienten
 echo $json;
