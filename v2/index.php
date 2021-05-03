@@ -244,120 +244,81 @@ if ($show && $categoryFilter) {
     }
 }
 
+// **********************************************************'
 
-
-
-
-
-
-// // * if both are wrong
-
-// if ($show && $categoryFilter) {
-
-//     if (($show <= 0 || $show > 20)) {
-//         $product = array(
-//             "Show" => "Show must be between 1 and 20",
-//         );
-//         array_push($products, $product);
-//     } elseif (($show <= 0 || $show > 20) || ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
-//         $product = array(
-//             "Category" => "Category not found"
-
-//         );
-//         array_push($products, $product);
-
-//         $product = array(
-//             "Show" => "Show must be between 1 and 20",
-//         );
-//         array_push($products, $product);
-//     }
-// }
-// else {
-//     for ($i = 0; $i < $show; $i++) {
-
-//         $product = array(
-//             "id" => $id[$i],
-//             "title" => $title[$i],
-//             "price" => $price[$i],
-//             "description" => $description[$i],
-//             "category" => $category[$i],
-//             "image" => $image[$i],
-//             "cho" => $categoryFilter
-
-//         );
-
-//         array_push($products, $product);
-//     }
-// }
+// ** CATEG WORKING HERE
 
 // * if what is searched is not in category array
-if (!in_array($categoryFilter, $category)) {
 
-    $product = array(
-        "Category" => "Category not found"
-    );
-    array_push($products, $product);
-} elseif ($categoryFilter === "men") {
+if ($categoryFilter) {
+    if (!in_array($categoryFilter, $category)) {
 
-    // for ($i = 0; $i < $show; $i++) {
+        $product = array(
+            "Category" => "Category not found"
+        );
+        array_push($products, $product);
+    } elseif ($categoryFilter === "men") {
 
-    for ($i = 0; $i < $show; $i++) {
+        // for ($i = 0; $i < $show; $i++) {
 
-        $tit = $title[$i];
-        $ids = $id[$tit];
-        $desc = $description[$tit];
-        $img = $image[$tit];
-        $pri = $price[$tit];
-        $categ = $category[$tit];
+        for ($i = 0; $i < $show; $i++) {
 
-        if ($categ === "men") {
-            $product = array(
-                "id" => $ids,
-                "title" => $tit,
-                "description" => $desc,
-                "image" => $img,
-                "price" => $pri,
-                "category" => $categ,
-            );
-            array_push($products, $product);
+            $tit = $title[$i];
+            $ids = $id[$tit];
+            $desc = $description[$tit];
+            $img = $image[$tit];
+            $pri = $price[$tit];
+            $categ = $category[$tit];
+
+            if ($categ === "men") {
+                $product = array(
+                    "id" => $ids,
+                    "title" => $tit,
+                    "description" => $desc,
+                    "image" => $img,
+                    "price" => $pri,
+                    "category" => $categ,
+                );
+                array_push($products, $product);
+            }
         }
+        // }
+
+
+        // array_push($products, $product);
     }
-    // }
 
 
-    // array_push($products, $product);
-}
+    if ($categoryFilter === "women") {
 
+        // for ($i = 0; $i < $show; $i++) {
 
-if ($categoryFilter === "women") {
+        for ($i = 0; $i < $show; $i++) {
 
-    // for ($i = 0; $i < $show; $i++) {
+            $tit = $title[$i];
+            $ids = $id[$tit];
+            $desc = $description[$tit];
+            $img = $image[$tit];
+            $pri = $price[$tit];
+            $categ = $category[$tit];
 
-    for ($i = 0; $i < $show; $i++) {
-
-        $tit = $title[$i];
-        $ids = $id[$tit];
-        $desc = $description[$tit];
-        $img = $image[$tit];
-        $pri = $price[$tit];
-        $categ = $category[$tit];
-
-        if ($categ === "women") {
-            $product = array(
-                "id" => $ids,
-                "title" => $tit,
-                "description" => $desc,
-                "image" => $img,
-                "price" => $pri,
-                "category" => $categ,
-            );
-            array_push($products, $product);
+            if ($categ === "women") {
+                $product = array(
+                    "id" => $ids,
+                    "title" => $tit,
+                    "description" => $desc,
+                    "image" => $img,
+                    "price" => $pri,
+                    "category" => $categ,
+                );
+                array_push($products, $product);
+            }
         }
+        // }
+
+
+        // array_push($products, $product);
     }
-    // }
-
-
-    // array_push($products, $product);
 }
 // }
 
