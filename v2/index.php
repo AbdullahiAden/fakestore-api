@@ -191,25 +191,27 @@ if (!isset($_GET['show']) && !isset($_GET['category'])) {
 
 if ($show && $categoryFilter) {
 
-    if (($show <= 0 || $show > 20)) {
+    if (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
         $product = array(
-            "Show" => "Show must be between 1 and 20",
+            "Show" => "Show must be between 1 and 20--",
         );
         array_push($products, $product);
 
         // * if one is wrong
-    } elseif (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
-        $product = array(
-            "Category" => "Category not found"
-
-        );
-        array_push($products, $product);
-
-        $product = array(
-            "Show" => "Show must be between 1 and 20",
-        );
-        array_push($products, $product);
     }
+
+    // elseif (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
+    //     $product = array(
+    //         "Category" => "Category not found"
+
+    //     );
+    //     array_push($products, $product);
+
+    //     $product = array(
+    //         "Show" => "Show must be between 1 and 20",
+    //     );
+    //     array_push($products, $product);
+    // }
 } elseif (isset($_GET['show'])) {
 
     if ($show <= 0 or $show > 20) {
@@ -254,7 +256,7 @@ if ($categoryFilter) {
     if (!in_array($categoryFilter, $category)) {
 
         $product = array(
-            "Category" => "Category not found"
+            "Category" => "Category not found--"
         );
         array_push($products, $product);
     } elseif ($categoryFilter === "men") {
