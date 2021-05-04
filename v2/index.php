@@ -247,57 +247,62 @@ if ($categoryFilter) {
     // * for men  
     elseif ($categoryFilter === "men") {
 
+        //  handle show limit (1-20) with catgeory  
+        if ($show <= count($category) && $show > 0) {
+            for ($i = 0; $i < count($category); $i++) {
 
-        for ($i = 0; $i < $show; $i++) {
+                $tit = $title[$i];
+                $ids = $id[$tit];
+                $desc = $description[$tit];
+                $img = $image[$tit];
+                $pri = $price[$tit];
+                $categ = $category[$tit];
 
-            $tit = $title[$i];
-            $ids = $id[$tit];
-            $desc = $description[$tit];
-            $img = $image[$tit];
-            $pri = $price[$tit];
-            $categ = $category[$tit];
+                if ($categ === "men") {
+                    $product = array(
+                        "id" => $ids,
+                        "title" => $tit,
+                        "description" => $desc,
+                        "image" => $img,
+                        "price" => $pri,
+                        "category" => $categ,
+                    );
 
-            if ($categ === "men") {
-                $product = array(
-                    "id" => $ids,
-                    "title" => $tit,
-                    "description" => $desc,
-                    "image" => $img,
-                    "price" => $pri,
-                    "category" => $categ,
-                );
-
-                array_push($products, $product);
-                shuffle($products);
+                    array_push($products, $product);
+                    shuffle($products);
+                }
             }
         }
     }
 
 
     // * for women 
-    if ($categoryFilter === "women") {
+    elseif ($categoryFilter === "women") {
 
-        for ($i = 0; $i < $show; $i++) {
+        //  handle show limit (1-20) with catgeory  
+        if ($show <= count($category) && $show > 0) {
+            for ($i = 0; $i < count($category); $i++) {
 
-            $tit = $title[$i];
-            $ids = $id[$tit];
-            $desc = $description[$tit];
-            $img = $image[$tit];
-            $pri = $price[$tit];
-            $categ = $category[$tit];
+                $tit = $title[$i];
+                $ids = $id[$tit];
+                $desc = $description[$tit];
+                $img = $image[$tit];
+                $pri = $price[$tit];
+                $categ = $category[$tit];
 
-            if ($categ === "women") {
-                $product = array(
-                    "id" => $ids,
-                    "title" => $tit,
-                    "description" => $desc,
-                    "image" => $img,
-                    "price" => $pri,
-                    "category" => $categ,
-                );
+                if ($categ === "women") {
+                    $product = array(
+                        "id" => $ids,
+                        "title" => $tit,
+                        "description" => $desc,
+                        "image" => $img,
+                        "price" => $pri,
+                        "category" => $categ,
+                    );
 
-                array_push($products, $product);
-                shuffle($products);
+                    array_push($products, $product);
+                    shuffle($products);
+                }
             }
         }
     }
