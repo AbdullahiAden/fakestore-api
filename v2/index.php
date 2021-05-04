@@ -8,7 +8,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Referrer-Policy: no-referrer");
 
 
-
 //  Skapa arrayer
 
 
@@ -193,26 +192,24 @@ if ($show && $categoryFilter) {
 
     if (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
         $product = array(
-            "Show" => "Show must be between 1 and 20--",
+            "Show" => "Show must be between 1 and 20",
         );
         array_push($products, $product);
-
-        // * if one is wrong
     }
+}
+// elseif (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
+//     $product = array(
+//         "Category" => "Category not found"
 
-    // elseif (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
-    //     $product = array(
-    //         "Category" => "Category not found"
+//     );
+//     array_push($products, $product);
 
-    //     );
-    //     array_push($products, $product);
-
-    //     $product = array(
-    //         "Show" => "Show must be between 1 and 20",
-    //     );
-    //     array_push($products, $product);
-    // }
-} elseif (isset($_GET['show'])) {
+//     $product = array(
+//         "Show" => "Show must be between 1 and 20",
+//     );
+//     array_push($products, $product);
+// }
+elseif (isset($_GET['show'])) {
 
     if ($show <= 0 or $show > 20) {
         $product = array(
@@ -246,22 +243,17 @@ if ($show && $categoryFilter) {
     }
 }
 
-// **********************************************************'
-
-// ** CATEG WORKING HERE
-
-// * if what is searched is not in category array
+// * category filter
 
 if ($categoryFilter) {
     if (!in_array($categoryFilter, $category)) {
 
         $product = array(
-            "Category" => "Category not found--"
+            "Category" => "Category not found"
         );
         array_push($products, $product);
     } elseif ($categoryFilter === "men") {
 
-        // for ($i = 0; $i < $show; $i++) {
 
         for ($i = 0; $i < $show; $i++) {
 
@@ -284,16 +276,10 @@ if ($categoryFilter) {
                 array_push($products, $product);
             }
         }
-        // }
-
-
-        // array_push($products, $product);
     }
 
 
     if ($categoryFilter === "women") {
-
-        // for ($i = 0; $i < $show; $i++) {
 
         for ($i = 0; $i < $show; $i++) {
 
@@ -316,19 +302,11 @@ if ($categoryFilter) {
                 array_push($products, $product);
             }
         }
-        // }
-
-
-        // array_push($products, $product);
     }
 }
-// }
 
 
-// print_r($names); die();
-
-// Steg 4 – Konvertera PHP-arrayen ($names) till JSON
-
+// Konvertera PHP-arrayen ($names) till JSON
 
 $json = json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 // Skicka JSON till klienten
