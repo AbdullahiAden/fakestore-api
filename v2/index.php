@@ -59,26 +59,26 @@ $title = [
 
 
 $description = [
-    "bag" =>  "desc bag",
-    "shirt" => "desc shirt",
-    "trouser" => "desc trouser",
-    "shorts" => "desc shorts",
-    "tie" => "desc tie",
-    "t-shirt" => "desc t-shirt",
-    "shoes" => "desc shoes",
-    "sweater" => "desc sweater",
-    "jacket" => "desc jacket",
-    "coat" => "desc coat",
-    "socks" => "desc socks",
-    "tracksuit" => "desc tracksuit",
-    "dress" => "desc dress",
-    "blouse" => "desc blouse",
-    "nighty" => "desc nighty",
-    "bikini" => "desc bikini",
-    "boots" => "desc boots",
-    "cap" => "desc cap",
-    "polo shirt" => " desc polo shirt",
-    "shawl" => " desc shawl"
+    "bag" =>  "description for bag",
+    "shirt" => "description for  shirt",
+    "trouser" => "description for  trouser",
+    "shorts" => "description for  shorts",
+    "tie" => "description for  tie",
+    "t-shirt" => "description for  t-shirt",
+    "shoes" => "description for  shoes",
+    "sweater" => "description for  sweater",
+    "jacket" => "description for  jacket",
+    "coat" => "description for  coat",
+    "socks" => "description for  socks",
+    "tracksuit" => "description for  tracksuit",
+    "dress" => "description for  dress",
+    "blouse" => "description for  blouse",
+    "nighty" => "description for  nighty",
+    "bikini" => "description for  bikini",
+    "boots" => "description for  boots",
+    "cap" => "description for  cap",
+    "polo shirt" => " description for  polo shirt",
+    "shawl" => " description for  shawl"
 
 ];
 
@@ -186,7 +186,7 @@ if (!isset($_GET['show']) && !isset($_GET['category'])) {
 
 
 
-// * if both are wrong
+// * if both show and categoryFilter are wrong
 
 if ($show && $categoryFilter) {
 
@@ -197,18 +197,7 @@ if ($show && $categoryFilter) {
         array_push($products, $product);
     }
 }
-// elseif (($show <= 0 || $show > 20) && ($categoryFilter !== "men" || $categoryFilter !== "women" || $categoryFilter !== "jewelery")) {
-//     $product = array(
-//         "Category" => "Category not found"
-
-//     );
-//     array_push($products, $product);
-
-//     $product = array(
-//         "Show" => "Show must be between 1 and 20",
-//     );
-//     array_push($products, $product);
-// }
+// * only if show is given 
 elseif (isset($_GET['show'])) {
 
     if ($show <= 0 or $show > 20) {
@@ -218,7 +207,6 @@ elseif (isset($_GET['show'])) {
         array_push($products, $product);
     } else {
 
-        // * RANDOM GENERATE working BUT ::: NOT UNIQUE .........
 
         for ($i = 0; $i < $show; $i++) {
 
@@ -238,6 +226,7 @@ elseif (isset($_GET['show'])) {
                 "price" => $pri,
                 "category" => $categ,
             );
+
             array_push($products, $product);
         }
     }
@@ -252,7 +241,11 @@ if ($categoryFilter) {
             "Category" => "Category not found"
         );
         array_push($products, $product);
-    } elseif ($categoryFilter === "men") {
+    }
+
+
+    // * for men  
+    elseif ($categoryFilter === "men") {
 
 
         for ($i = 0; $i < $show; $i++) {
@@ -273,12 +266,15 @@ if ($categoryFilter) {
                     "price" => $pri,
                     "category" => $categ,
                 );
+
                 array_push($products, $product);
+                shuffle($products);
             }
         }
     }
 
 
+    // * for women 
     if ($categoryFilter === "women") {
 
         for ($i = 0; $i < $show; $i++) {
@@ -299,14 +295,25 @@ if ($categoryFilter) {
                     "price" => $pri,
                     "category" => $categ,
                 );
+
                 array_push($products, $product);
+                shuffle($products);
             }
         }
     }
 }
 
 
-// Konvertera PHP-arrayen ($names) till JSON
+
+// ***********************
+
+// * what is not working is , cannot show the amount of show if 
+// * it is defined with  category, INSTEAD IT SHOWS ALL ITEMS UP UNTILL SHOW  
+// todo -- randoms not unique
+
+
+
+// Konvertera PHP-arrayen ($products) till JSON
 
 $json = json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 // Skicka JSON till klienten
