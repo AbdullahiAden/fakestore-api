@@ -247,11 +247,44 @@ if ($categoryFilter) {
     // * for men  
     elseif ($categoryFilter === "men") {
 
-        //  handle show limit (1-20) with catgeory  
+        // * handle show limit (1-20) with catgeory  **** 
+        // TODO ----- limit how much to show from products when show is given 
         if ($show <= count($category) && $show > 0) {
-            for ($i = 0; $i < count($category); $i++) {
 
+
+            // for ($i = 0; $i < count($category); $i++) {
+
+            //     // $tit = $title[rand(0, count($title) - 1)];
+            //     $tit = $title[$i];
+            //     $ids = $id[$tit];
+            //     $desc = $description[$tit];
+            //     $img = $image[$tit];
+            //     $pri = $price[$tit];
+            //     $categ = $category[$tit];
+
+            //     if ($categ === "men") {
+            //         if ($i < $show) {
+            //             $product = array(
+            //                 "id" => $ids,
+            //                 "title" => $tit,
+            //                 "description" => $desc,
+            //                 "image" => $img,
+            //                 "price" => $pri,
+            //                 "category" => $categ,
+            //             );
+
+            //             // while ($show ) {
+            //             array_push($products, $product);
+            //         }
+
+            //         shuffle($products);
+            //     }
+            // }
+            for ($i = 0; $i <= $show; $i++) {
                 $tit = $title[$i];
+                // for ($i = 0; $i < count($category); $i++) {
+
+                // $tit = $title[rand(0, count($title) - 1)];
                 $ids = $id[$tit];
                 $desc = $description[$tit];
                 $img = $image[$tit];
@@ -268,9 +301,14 @@ if ($categoryFilter) {
                         "category" => $categ,
                     );
 
+                    // * only push if categ is men '
+                    // * keep populting 
+
                     array_push($products, $product);
                     shuffle($products);
                 }
+
+                // }
             }
         }
     }
