@@ -35,26 +35,8 @@ $id = [
 ];
 
 $title = [
-  "bag",
-  "shirt",
-  "trouser",
-  "shorts",
-  "tie",
-  "t-shirt",
-  "shoes",
-  "sweater",
-  "jacket",
-  "coat",
-  "socks",
-  "tracksuit",
-  "dress",
-  "blouse",
-  "nighty",
-  "bikini",
-  "boots",
-  "cap",
-  "polo shirt",
-  "shawl"
+  "bag", "shirt",  "trouser",  "shorts", "tie", "t-shirt", "shoes", "sweater", "jacket", "coat",
+  "socks", "tracksuit",    "dress", "blouse",  "nighty", "bikini", "boots", "cap", "polo shirt",  "shawl"
 ];
 
 
@@ -155,15 +137,9 @@ $category = [
 ];
 
 $men = [
-  "shirt",
-  "trouser",
-  "shorts",
-  "tie",
-  "boots",
-  "cap",
-  "polo shirt"
-
+  "shirt", "trouser", "shorts", "tie", "boots",  "cap", "polo shirt"
 ];
+$womenClothes = ["bag", "t-shirt", "shoes", "sweater", "tracksuit", "dress", "blouse", "jacket", "coat", "socks", "nighty", "bikini", "shawl",];
 
 $menArray = [
   "shirt" => "men",
@@ -191,7 +167,7 @@ $womenArray = [
 
 ];
 
-// spara  i en ny array
+
 $products = array();
 
 $show = $_GET['show'] ?? 20;
@@ -221,7 +197,7 @@ if (!isset($_GET['show']) && !isset($_GET['category'])) {
 
 
 
-// * if both show and categoryFilter are wrong
+//  if both show and categoryFilter are wrong
 
 if ($show && $categoryFilter) {
 
@@ -232,7 +208,7 @@ if ($show && $categoryFilter) {
     array_push($products, $product);
   }
 }
-// * only if show is given 
+// only if show is given 
 elseif (isset($_GET['show'])) {
 
   if ($show <= 0 or $show > 20) {
@@ -265,7 +241,7 @@ elseif (isset($_GET['show'])) {
   }
 }
 
-// * category filter
+// for category filter
 
 if ($categoryFilter) {
   if (!in_array($categoryFilter, $category)) {
@@ -277,11 +253,12 @@ if ($categoryFilter) {
   }
 
 
-  // * for men  
+  // for category fiilter men  
   elseif ($categoryFilter === "men") {
     if ($show <= count($category) && $show > 0) {
 
       for ($i = 0; $i < $show; $i++) {
+        // get titles / names from men clothes array
         $tit = $men[$i];
         $ids = $id[$tit];
         $desc = $description[$tit];
@@ -306,44 +283,18 @@ if ($categoryFilter) {
   }
 
 
-  // * for women --- NOT WORKING FOR WOMEN
+  // for category fiilter women 
   elseif ($categoryFilter === "women") {
-
-    // * handle show limit (1-20) with catgeory  **** 
-    // TODO ----- limit how much to show from products when show is given 
     if ($show <= count($category) && $show > 0) {
-      // for ($i = 0; $i <= $show; $i++) {
-      //     $tit = $title[$i];
-      //     // $tit = $title[rand(0, count($title), -1)];
-      //     $ids = $id[$tit];
-      //     $desc = $description[$tit];
-      //     $img = $image[$tit];
-      //     $pri = $price[$tit];
-      //     $categ = $category[$tit];
 
-      //     // if (in_array('women', $category)) {
-
-      //     if ($categ === "women") {
-      //         $product = array(
-      //             "id" => $ids,
-      //             "title" => $tit,
-      //             "description" => $desc,
-      //             "image" => $img,
-      //             "price" => $pri,
-      //             "category" => $categ,
-      //         );
-      //         shuffle($products);
-      //         array_push($products, $product);
-      //     }
-      // }
       for ($i = 0; $i < $show; $i++) {
-        // if ($category[$i] == 'men') {
-        $tit = $title[rand(0, count($title) - 1)];
+        // get titles / names from women clothes array
+        $tit = $womenClothes[$i];
         $ids = $id[$tit];
         $desc = $description[$tit];
         $img = $image[$tit];
         $pri = $price[$tit];
-        $categ = $category[$tit];
+        $categ = $womenArray[$tit];
 
         $product = array(
           "id" => $ids,
@@ -354,25 +305,13 @@ if ($categoryFilter) {
           "category" => $categ,
         );
         if ($product['category'] == "women") {
-          // foreach ($category as $c) {
           array_push($products, $product);
+          shuffle($products);
         }
-        // }
-        // }
       }
     }
   }
 }
-
-
-
-// ***********************
-
-// * what is not working is , cannot show the amount of show if 
-// * it is defined with  category, INSTEAD IT SHOWS ALL ITEMS UP UNTILL SHOW  
-// todo -- randoms not unique
-
-
 
 // Konvertera PHP-arrayen ($products) till JSON
 
