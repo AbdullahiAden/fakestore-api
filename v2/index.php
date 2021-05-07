@@ -8,9 +8,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Referrer-Policy: no-referrer");
 
 
-//  Skapa arrayer
-
-
 $id = [
   "bag" => 1,
   "shirt" => 2,
@@ -197,7 +194,7 @@ if (!isset($_GET['show']) && !isset($_GET['category'])) {
 
 
 
-//  if both show and categoryFilter are wrong
+// handles error msgs if both show and categoryFilter are wrong
 
 if ($show && $categoryFilter) {
 
